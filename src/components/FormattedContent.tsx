@@ -121,7 +121,8 @@ export const FormattedContent: React.FC<FormattedContentProps> = ({
     }
   }
 
-  const hasCustomTextColor = className.includes('text-');
+  // Match actual text color utility classes, ignoring sizing (text-sm, text-base) and alignment (text-center, etc.)
+  const hasCustomTextColor = /(?:^|\s)text-(?:\[|white|black|stone|zinc|slate|gray|neutral|amber|yellow|emerald|rose|blue)/.test(className);
   const baseColorClass = hasCustomTextColor ? '' : 'text-[#4E5667]';
 
   return (

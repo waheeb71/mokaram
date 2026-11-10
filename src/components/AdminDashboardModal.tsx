@@ -28,7 +28,10 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Send,
+  Bot,
+  BarChart3
 } from 'lucide-react';
 import { Project, Advertisement, QuoteRequest, SiteSettings, ServiceItem } from '../types.ts';
 import { FormattingToolbar } from './FormattingToolbar.tsx';
@@ -165,8 +168,49 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [pwdLoading, setPwdLoading] = useState(false);
   const [pwdMsg, setPwdMsg] = useState('');
 
+  // --- TELEGRAM NOTIFICATIONS STATE ---
+  const [telegramStatus, setTelegramStatus] = useState<{ configured: boolean; botUsername?: string } | null>(null);
+  const [telegramTesting, setTelegramTesting] = useState(false);
+  const [telegramTestMsg, setTelegramTestMsg] = useState('');
+  const [telegramTestSuccess, setTelegramTestSuccess] = useState<boolean | null>(null);
+
+  const fetchTelegramStatus = async () => {
+    try {
+      const res = await fetch('/api/telegram/status');
+      const data = await res.json();
+      setTelegramStatus(data);
+    } catch {
+      // non-blocking
+    }
+  };
+
+  const handleTestTelegram = async () => {
+    setTelegramTesting(true);
+    setTelegramTestMsg('');
+    setTelegramTestSuccess(null);
+    try {
+      const res = await fetch('/api/telegram/test', { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        setTelegramTestSuccess(true);
+        setTelegramTestMsg(isAr ? 'تم إرسال إشعار تجريبي بنجاح إلى محادثتك على تليجرام!' : 'Test notification sent to Telegram successfully!');
+      } else {
+        setTelegramTestSuccess(false);
+        setTelegramTestMsg(data.error || (isAr ? 'فشل إرسال الإشعار. تأكد من إعداد TELEGRAM_BOT_TOKEN و TELEGRAM_CHAT_ID في .env' : 'Failed to send test notification.'));
+      }
+    } catch (err: any) {
+      setTelegramTestSuccess(false);
+      setTelegramTestMsg(err.message || 'Error sending test notification');
+    } finally {
+      setTelegramTesting(false);
+    }
+  };
+
   // Sync settingsForm when settings prop updates
   useEffect(() => {
+    if (isOpen) {
+      fetchTelegramStatus();
+    }
     if (settings) {
       setSettingsForm((prev) => ({
         ...prev,
@@ -2240,6 +2284,96 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         placeholder={isAr ? 'اكتب نبذة شاملة عن تاريخ المؤسسة وخبراتها ومجالات عملها...' : 'About company...'}
                         className="w-full px-3 py-2.5 bg-white border border-[#DDD5C5] focus:border-[#9B7846] rounded-lg text-xs sm:text-sm text-[#15181F] focus:outline-none"
                       />
+                    </div>
+
+                    {/* Telegram Bot Integration Card */}
+                    <div className="space-y-4 pt-4 border-t border-[#E8E2D5]">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <Bot className="w-4 h-4 text-[#0088cc]" />
+                          <h5 className="text-xs font-bold text-[#15181F] uppercase tracking-wider">
+                            {isAr ? '6. إشعارات بوت تليجرام الفورية لطلبات عروض الأسعار' : '6. Instant Telegram Bot Quote Notifications'}
+                          </h5>
+                        </div>
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
+                            telegramStatus?.configured
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              : 'bg-amber-50 text-amber-700 border border-amber-200'
+                          }`}
+                        >
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              telegramStatus?.configured ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                            }`}
+                          />
+                          {telegramStatus?.configured
+                            ? isAr ? `متصل (${telegramStatus.botUsername || 'بوت معتمد'})` : 'Active & Connected'
+                            : isAr ? 'غير مفعّل في ملف .env' : 'Not configured in .env'}
+                        </span>
+                      </div>
+
+                      <div className="bg-[#FAF8F5] p-3.5 rounded-lg border border-[#E8E2D5] text-xs space-y-2 text-[#4E5667]">
+                        <p className="leading-relaxed">
+                          {isAr
+                            ? 'عند تفعيل البوت، يتم إرسال أي طلب عرض سعر جديد من العميل فوراً إلى حسابك على تليجرام مع كافة التفاصيل وزر مباشر لفتح محادثة واتساب مع العميل بنقرة واحدة.'
+                            : 'When active, every new quote request is dispatched instantly to your Telegram with all customer details and a 1-click WhatsApp action.'}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-[#E8E2D5]/60">
+                          <button
+                            type="button"
+                            onClick={handleTestTelegram}
+                            disabled={telegramTesting}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold rounded-md shadow-xs transition-colors disabled:opacity-50 text-xs"
+                          >
+                            <Send className="w-3 h-3" />
+                            <span>{telegramTesting ? (isAr ? 'جارٍ الإرسال...' : 'Sending...') : (isAr ? 'إرسال إشعار تجريبي للبوت' : 'Send Test Notification')}</span>
+                          </button>
+                          {telegramTestMsg && (
+                            <span
+                              className={`text-xs font-semibold ${
+                                telegramTestSuccess ? 'text-emerald-700' : 'text-rose-600'
+                              }`}
+                            >
+                              {telegramTestMsg}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Website Analytics Card */}
+                    <div className="space-y-4 pt-4 border-t border-[#E8E2D5]">
+                      <div className="flex items-center gap-2">
+                        <BarChart3 className="w-4 h-4 text-[#9B7846]" />
+                        <h5 className="text-xs font-bold text-[#15181F] uppercase tracking-wider">
+                          {isAr ? '7. تحليلات وإحصائيات الزوار (Website Analytics)' : '7. Website Analytics & Visitor Tracking'}
+                        </h5>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div className="bg-[#FAF8F5] p-3.5 rounded-lg border border-[#E8E2D5] space-y-1.5">
+                          <div className="font-bold text-[#15181F] flex items-center justify-between">
+                            <span>{isAr ? 'تحليلات كلاود فلير (الأسهل والأسرع)' : 'Cloudflare Web Analytics'}</span>
+                            <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">مجاني 100%</span>
+                          </div>
+                          <p className="text-[#4E5667] leading-relaxed">
+                            {isAr
+                              ? 'ميزة مدمجة بضغطة زر واحدة داخل لوحة تحكم Cloudflare Pages تحت تبويب "Analytics". تعرض عدد الزوار والصفحات الأكثر زيارة والدول بدون الحاجة لأي كود.'
+                              : 'Built-in 1-click analytics inside Cloudflare Pages under the Analytics tab. Shows live visitors, countries, and pages without any code changes.'}
+                          </p>
+                        </div>
+                        <div className="bg-[#FAF8F5] p-3.5 rounded-lg border border-[#E8E2D5] space-y-1.5">
+                          <div className="font-bold text-[#15181F] flex items-center justify-between">
+                            <span>Google Analytics 4 (GA4)</span>
+                            <span className="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-bold">مدمج بالكود</span>
+                          </div>
+                          <p className="text-[#4E5667] leading-relaxed">
+                            {isAr
+                              ? 'الكود جاهز ويعمل تلقائياً عند إضافة معرف القياس VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX في ملف .env أو في إعدادات البيئة على الاستضافة.'
+                              : 'Pre-wired in code and activates automatically when VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX is defined in .env or deployment environment variables.'}
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
                     <button

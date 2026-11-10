@@ -81,12 +81,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </h1>
         </ScrollReveal>
 
-        {/* Value Proposition Subtitle with Formatting Support */}
-        <ScrollReveal direction="up" delay={0.4} distance={25} className="max-w-3xl mx-auto mb-6 sm:mb-10 px-2 sm:px-0">
-          <FormattedContent
-            text={heroSubtitle}
-            className="text-white text-sm sm:text-base lg:text-xl font-medium leading-relaxed text-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
-          />
+        {/* Value Proposition Subtitle with Graphic Treatment & High Contrast */}
+        <ScrollReveal direction="up" delay={0.4} distance={25} className="max-w-3xl mx-auto mb-6 sm:mb-10 px-3 sm:px-4">
+          <div className="relative">
+            {/* Soft ambient vignette behind text to ensure 100% legibility over any photo reflections without looking like a rigid card */}
+            <div className="absolute -inset-x-4 sm:-inset-x-8 -inset-y-2 bg-[#0E121B]/60 rounded-2xl blur-md pointer-events-none -z-10" />
+            <FormattedContent
+              text={heroSubtitle}
+              className="text-[#FAF8F5] text-sm sm:text-base lg:text-xl font-medium leading-relaxed sm:leading-loose text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_4px_rgba(0,0,0,1)]"
+            />
+          </div>
         </ScrollReveal>
 
         {/* Centered Action Buttons - Fully Responsive Mobile Stack */}

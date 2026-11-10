@@ -60,6 +60,89 @@ if (!DATABASE_URL) {
 }
 
 const ADMIN_DEFAULT_PASSWORD = process.env.ADMIN_DEFAULT_PASSWORD?.trim() || '';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN?.trim() || '';
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID?.trim() || '';
+
+function escapeTelegramHtml(text: string): string {
+  if (!text) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+async function sendTelegramQuoteNotification(quote: {
+  customer_name: string;
+  phone: string;
+  service_type: string;
+  city: string;
+  district?: string;
+  details?: string;
+  preferred_time?: string;
+}) {
+  const token = TELEGRAM_BOT_TOKEN;
+  const chatId = TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    console.log('ℹ️ Telegram notification skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not configured in .env');
+    return false;
+  }
+
+  try {
+    let cleanPhone = quote.phone.replace(/[^0-9]/g, '');
+    if (cleanPhone.startsWith('05')) {
+      cleanPhone = '966' + cleanPhone.substring(1);
+    } else if (cleanPhone.startsWith('5')) {
+      cleanPhone = '966' + cleanPhone;
+    }
+
+    const locationText = quote.district ? `${quote.city} - ${quote.district}` : quote.city;
+    const now = new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' });
+
+    const message = `🔔 <b>طلب عرض سعر جديد - مؤسسة ريم النفوذ</b>\n\n` +
+      `👤 <b>اسم العميل:</b> ${escapeTelegramHtml(quote.customer_name)}\n` +
+      `📞 <b>رقم الجوال:</b> <code>${escapeTelegramHtml(quote.phone)}</code>\n` +
+      `🛠️ <b>الخدمة المطلوبة:</b> <b>${escapeTelegramHtml(quote.service_type)}</b>\n` +
+      `📍 <b>الموقع:</b> ${escapeTelegramHtml(locationText)}\n` +
+      `⏰ <b>الوقت المفضل:</b> ${escapeTelegramHtml(quote.preferred_time || 'في أقرب وقت')}\n\n` +
+      `📝 <b>تفاصيل المشروع / الملاحظات:</b>\n` +
+      `<i>${escapeTelegramHtml(quote.details || 'لا توجد تفاصيل إضافية')}</i>\n\n` +
+      `📅 <b>تاريخ الطلب:</b> ${now}`;
+
+    const replyMarkup = {
+      inline_keyboard: [
+        [
+          {
+            text: '💬 فتح محادثة واتساب فورية مع العميل',
+            url: `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`مرحباً ${quote.customer_name}، معك مؤسسة ريم النفوذ بخصوص طلبكم لخدمة (${quote.service_type}):`)}`,
+          },
+        ],
+      ],
+    };
+
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'HTML',
+        reply_markup: replyMarkup,
+      }),
+    });
+
+    const data = await res.json();
+    if (!data.ok) {
+      console.error('❌ Telegram Bot API error:', data.description);
+      return false;
+    }
+    console.log('✅ Telegram quote alert delivered successfully!');
+    return true;
+  } catch (err: any) {
+    console.error('❌ Error sending Telegram notification:', err.message);
+    return false;
+  }
+}
 
 const pool = new pg.Pool({
   connectionString: DATABASE_URL,
@@ -823,15 +906,77 @@ app.post('/api/quotes', async (req, res) => {
       [customer_name, phone, service_type, city, district || '', details || '', preferred_time || 'في أقرب وقت']
     );
 
+    const newQuote = result.rows[0];
+
+    // Send instant Telegram notification to the manager/bot
+    sendTelegramQuoteNotification({
+      customer_name,
+      phone,
+      service_type,
+      city,
+      district,
+      details,
+      preferred_time,
+    }).catch((err) => console.warn('Telegram notification background error:', err));
+
     res.json({
       success: true,
       message: 'تم إرسال طلب عرض السعر بنجاح! سيتم التواصل معكم فوراً.',
-      data: result.rows[0],
+      data: newQuote,
     });
   } catch (error: any) {
     console.error('Error saving quote request:', error);
     res.status(500).json({ success: false, error: error.message });
   }
+});
+
+// Telegram Notification Test & Status Endpoints
+app.post('/api/telegram/test', async (req, res) => {
+  const token = TELEGRAM_BOT_TOKEN;
+  const chatId = TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    return res.status(400).json({
+      success: false,
+      error: 'TELEGRAM_BOT_TOKEN أو TELEGRAM_CHAT_ID غير محدد في ملف .env',
+      configured: false,
+    });
+  }
+
+  try {
+    const now = new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' });
+    const testMessage = `🚀 <b>تجربة اتصال بوت تلجرام - مؤسسة ريم النفوذ</b>\n\n` +
+      `✅ <b>حالة الاتصال:</b> ناجح ومتصل بنجاح!\n` +
+      `🔔 سيتم إرسال أي طلب عرض سعر جديد يصل إلى الموقع مباشرة هنا فوراً مع رابط الواتساب وبيانات العميل.\n\n` +
+      `⏰ <b>التوقيت:</b> ${now}`;
+
+    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: testMessage,
+        parse_mode: 'HTML',
+      }),
+    });
+
+    const tgData = await tgRes.json();
+    if (tgData.ok) {
+      return res.json({ success: true, message: 'تم إرسال رسالة التجربة إلى التلجرام بنجاح!' });
+    } else {
+      return res.status(400).json({ success: false, error: tgData.description });
+    }
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/telegram/status', (req, res) => {
+  res.json({
+    configured: Boolean(TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID),
+    hasToken: Boolean(TELEGRAM_BOT_TOKEN),
+    hasChatId: Boolean(TELEGRAM_CHAT_ID),
+  });
 });
 
 // 2. Get all quote requests (Admin)
