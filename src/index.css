@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Cairo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Custom luxury scrollbar for creamy theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F5EE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8CFBE;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A07D4C;
+}
+
+/* Luxury creamy glass & warm bronze glow accents */
+.luxury-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(160, 125, 76, 0.18);
+}
+
+.luxury-border {
+  border: 1px solid rgba(160, 125, 76, 0.22);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #7A5C2E 0%, #A6804B 50%, #5B431F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
