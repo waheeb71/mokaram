@@ -607,9 +607,13 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
         {/* SECURITY AUTHENTICATION GATE */}
         {!isAuthenticated ? (
           <div className="p-8 sm:p-14 flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-6">
-            <div className="w-16 h-16 rounded-2xl bg-[#9B7846]/10 border border-[#9B7846]/30 text-[#9B7846] flex items-center justify-center shadow-sm">
-              <KeyRound className="w-8 h-8" />
-            </div>
+            <img
+              src="/logo-icon.png"
+              alt={isAr ? 'شعار مؤسسة ريم النفوذ' : 'Reem Al-Nufood Logo'}
+              className="w-16 h-16 object-contain drop-shadow-md select-none"
+              width={64}
+              height={64}
+            />
 
             <div>
               <h4 className="text-xl font-bold text-[#15181F] mb-2">

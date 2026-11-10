@@ -51,9 +51,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => handleNavClick(e, '#hero')}
             className="group flex items-center gap-3 whitespace-nowrap shrink-0 text-decoration-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#A5824E] to-[#7B5D2F] flex items-center justify-center shadow-md shadow-[#A5824E]/20 border border-[#FAF7F2]">
-              <span className="text-white font-black text-xl select-none">ر</span>
-            </div>
+            <img
+              src="/logo-icon.png"
+              alt={isAr ? 'شعار مؤسسة ريم النفوذ' : 'Reem Al-Nufood Logo'}
+              className="w-11 h-11 object-contain drop-shadow-sm select-none"
+              width={44}
+              height={44}
+            />
             <div className="flex flex-col">
               <span className="text-lg sm:text-xl font-bold tracking-tight text-[#181B22] group-hover:text-[#9B7846] transition-colors whitespace-nowrap">
                 {isAr ? settings.company_name_ar || 'ريم النفوذ للمقاولات' : settings.company_name_en || 'Reem Al-Nufood Contracting'}

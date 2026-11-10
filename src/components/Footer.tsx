@@ -31,9 +31,13 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1: Brand & Bio */}
           <ScrollReveal direction="up" delay={0.05} distance={20} className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#9B7846] to-[#7A5B2E] flex items-center justify-center font-bold text-white text-lg shadow-sm">
-                ر
-              </div>
+              <img
+                src="/logo-icon.png"
+                alt={isAr ? 'شعار مؤسسة ريم النفوذ' : 'Reem Al-Nufood Logo'}
+                className="w-11 h-11 object-contain drop-shadow-sm select-none"
+                width={44}
+                height={44}
+              />
               <span className="text-base font-bold text-[#15181F] tracking-tight">
                 {isAr ? settings.company_name_ar || 'مؤسسة ريم النفوذ للمقاولات' : settings.company_name_en || 'Reem Al-Nufood Contracting'}
               </span>
