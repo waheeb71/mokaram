@@ -25,24 +25,24 @@ export const AdvertisementsSection: React.FC<AdvertisementsSectionProps> = ({
   if (activeAds.length === 0) return null;
 
   return (
-    <section id="advertisements" className="py-20 bg-[#F4EFE6] relative overflow-hidden border-t border-[#E8E2D5]">
+    <section id="advertisements" className="py-12 sm:py-20 bg-[#F4EFE6] relative overflow-hidden border-t border-[#E8E2D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <ScrollReveal direction="up" distance={25} className="flex items-center justify-between mb-10">
+        <ScrollReveal direction="up" distance={25} className="flex items-center justify-between mb-6 sm:mb-10">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-[#8C6B3A] tracking-wider uppercase mb-2">
               <Tag className="w-3.5 h-3.5" />
               <span>{isAr ? 'عروض حصرية وإعلانات موسمية' : 'Exclusive Promotions & Offers'}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#15181F]">
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-[#15181F]">
               {isAr ? 'عروض وباقات مشاريع الرياض والخرج' : 'Special Project Packages'}
             </h2>
           </div>
         </ScrollReveal>
 
         {/* Ads Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {activeAds.map((ad, idx) => {
             const title = isAr ? ad.title_ar : ad.title_en || ad.title_ar;
             const description = isAr ? ad.description_ar : ad.description_en || ad.description_ar;
@@ -72,7 +72,7 @@ export const AdvertisementsSection: React.FC<AdvertisementsSectionProps> = ({
                         {badge}
                       </span>
                       <span className="text-xs text-[#717786] font-medium">
-                        {ad.target_cities || (isAr ? 'الرياض والخرج' : 'Riyadh & Al-Kharj')}
+                        {ad.target_cities || (isAr ? 'الرياض' : 'Riyadh & Al-Kharj')}
                       </span>
                     </div>
 

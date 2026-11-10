@@ -82,13 +82,13 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   )}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-[#FAF7F2] border border-[#E8E2D5] rounded-2xl shadow-2xl overflow-hidden my-auto">
-        
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl max-h-[92vh] flex flex-col bg-[#FAF7F2] border border-[#E8E2D5] rounded-2xl shadow-2xl overflow-hidden my-auto">
+
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-white">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#E8E2D5] bg-white shrink-0">
           <div>
-            <h3 className="text-lg font-bold text-[#15181F]">
+            <h3 className="text-base sm:text-lg font-bold text-[#15181F]">
               {isAr ? 'طلب عرض سعر واستشارة فورية' : 'Request Quotation & On-Site Survey'}
             </h3>
             <span className="text-xs text-[#717786]">
@@ -105,7 +105,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 sm:p-8">
+        <div className="p-4 sm:p-8 overflow-y-auto">
           {success ? (
             <div className="text-center py-6 space-y-5 animate-in zoom-in-95 duration-200">
               <div className="w-16 h-16 rounded-full bg-[#9B7846]/15 border border-[#9B7846] text-[#9B7846] mx-auto flex items-center justify-center">
@@ -145,7 +145,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              
+
               {errorMsg && (
                 <div className="p-3 text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-lg">
                   {errorMsg}

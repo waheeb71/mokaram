@@ -113,7 +113,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     badge_ar: 'عرض خاص',
     discount_label: 'خصم 15% لفترة محدودة',
     service_category: 'all',
-    target_cities: 'الرياض والخرج',
+    target_cities: 'الرياض',
     description_ar: '',
     image_url: '',
     is_active: true,
@@ -143,7 +143,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     email: settings.email || 'info@reem-alnufood.com',
     riyadh_address_ar: settings.riyadh_address_ar || 'الرياض - طريق الملك فهد - حي العقيق',
     alkharj_address_ar: settings.alkharj_address_ar || 'الخرج - طريق الملك عبدالعزيز - حي السلام',
-    about_summary_ar: settings.about_summary_ar || 'خبرة في التنفيذ، جودة في العمل، وثقة تدوم. نقدم خدمات متكاملة في مجال المقاولات العامة والأعمال الكهربائية والسكوريت والألمنيوم والترميم والتشطيبات بالرياض والخرج.',
+    about_summary_ar: settings.about_summary_ar || 'خبرة في التنفيذ، جودة في العمل، وثقة تدوم. نقدم خدمات متكاملة في مجال المقاولات العامة والأعمال الكهربائية والسكوريت والألمنيوم والترميم والتشطيبات بالرياض.',
     hero_title_ar: settings.hero_title_ar || 'خبرة في التنفيذ، جودة في العمل، وثقة تدوم.',
     hero_subtitle_ar: settings.hero_subtitle_ar || 'نقدم حلولاً متكاملة في المقاولات العامة، الأعمال الكهربائية، زجاج السيكوريت، الألمنيوم، الحدادة والترميم الإنشائي بأعلى معايير كود البناء السعودي مع الالتزام التام بالمواعيد.',
     stat_years_exp: settings.stat_years_exp || '15+',
@@ -356,7 +356,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
       badge_ar: 'عرض خاص',
       discount_label: 'خصم 15% لفترة محدودة',
       service_category: 'all',
-      target_cities: 'الرياض والخرج',
+      target_cities: 'الرياض',
       description_ar: '',
       image_url: '',
       is_active: true,
@@ -374,7 +374,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
       badge_ar: ad.badge_ar || 'عرض خاص',
       discount_label: ad.discount_label || '',
       service_category: ad.service_category || 'all',
-      target_cities: ad.target_cities || 'الرياض والخرج',
+      target_cities: ad.target_cities || 'الرياض',
       description_ar: ad.description_ar,
       image_url: ad.image_url || '',
       is_active: ad.is_active !== false,
@@ -560,7 +560,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 overflow-y-auto bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
       <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col bg-[#FAF7F2] border border-[#E8E2D5] rounded-2xl shadow-2xl overflow-hidden my-auto">
-        
+
         {/* Dashboard Header Bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-white sticky top-0 z-30">
           <div className="flex items-center gap-3">
@@ -685,11 +685,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   setEditingAd(null);
                   setEditingService(null);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-                  activeTab === 'quotes'
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${activeTab === 'quotes'
                     ? 'bg-[#9B7846] text-white shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-white'
-                }`}
+                  }`}
               >
                 <FileText className="w-3.5 h-3.5" />
                 <span>{isAr ? `طلبات الأسعار (${quotes.length})` : `Quotes (${quotes.length})`}</span>
@@ -701,11 +700,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   setEditingAd(null);
                   setEditingService(null);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-                  activeTab === 'projects'
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${activeTab === 'projects'
                     ? 'bg-[#9B7846] text-white shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-white'
-                }`}
+                  }`}
               >
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>{isAr ? `المشاريع والأعمال (${projects.length})` : `Projects (${projects.length})`}</span>
@@ -717,11 +715,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   setEditingProject(null);
                   setEditingService(null);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-                  activeTab === 'ads'
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${activeTab === 'ads'
                     ? 'bg-[#9B7846] text-white shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-white'
-                }`}
+                  }`}
               >
                 <Tag className="w-3.5 h-3.5" />
                 <span>{isAr ? `العروض والإعلانات (${ads.length})` : `Promotions (${ads.length})`}</span>
@@ -733,11 +730,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   setEditingProject(null);
                   setEditingAd(null);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-                  activeTab === 'services'
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${activeTab === 'services'
                     ? 'bg-[#9B7846] text-white shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-white'
-                }`}
+                  }`}
               >
                 <Layers className="w-3.5 h-3.5" />
                 <span>{isAr ? `الأنشطة والخدمات (${services.length})` : `Services (${services.length})`}</span>
@@ -750,11 +746,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   setEditingAd(null);
                   setEditingService(null);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-                  activeTab === 'settings'
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${activeTab === 'settings'
                     ? 'bg-[#9B7846] text-white shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-white'
-                }`}
+                  }`}
               >
                 <Settings className="w-3.5 h-3.5" />
                 <span>{isAr ? 'إعدادات الموقع والواجهة' : 'Site Settings'}</span>
@@ -767,11 +762,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   setEditingAd(null);
                   setEditingService(null);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${
-                  activeTab === 'security'
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap ${activeTab === 'security'
                     ? 'bg-[#9B7846] text-white shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-white'
-                }`}
+                  }`}
               >
                 <KeyRound className="w-3.5 h-3.5" />
                 <span>{isAr ? 'كلمة المرور والأمان' : 'Security'}</span>
@@ -780,7 +774,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
 
             {/* TAB CONTENT BODY */}
             <div className="flex-1 overflow-y-auto p-6">
-              
+
               {/* ======================================================== */}
               {/* TAB 1: QUOTES MANAGEMENT                                 */}
               {/* ======================================================== */}
@@ -1452,7 +1446,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                               type="text"
                               value={adForm.target_cities}
                               onChange={(e) => setAdForm({ ...adForm, target_cities: e.target.value })}
-                              placeholder="الرياض والخرج"
+                              placeholder="الرياض"
                               className="w-full px-3 py-2 bg-white border border-[#DDD5C5] focus:border-[#9B7846] rounded-lg text-xs text-[#15181F] focus:outline-none"
                             />
                           </div>
@@ -1913,7 +1907,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         </div>
 
                         <div className="pt-3 mt-3 border-t border-[#F2EDE2] flex items-center justify-between">
-                          <span className="text-[11px] text-[#717786]">الرياض والخرج</span>
+                          <span className="text-[11px] text-[#717786]">الرياض</span>
                           <button
                             onClick={() => handleOpenEditService(s)}
                             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#8C6B3A] bg-[#F4EFE6] hover:bg-[#EAE3D5] rounded-lg border border-[#DDD5C5] transition-colors"

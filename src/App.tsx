@@ -201,13 +201,13 @@ export default function App() {
   const isAr = lang === 'ar';
   const whatsappUrl = `https://wa.me/${settings.whatsapp_number}?text=${encodeURIComponent(
     isAr
-      ? `مرحباً ${settings.company_name_ar || 'مؤسسة ريم النفوذ'}، أود الاستفسار عن خدمات المقاولات والتشطيبات في الرياض والخرج.`
+      ? `مرحباً ${settings.company_name_ar || 'مؤسسة ريم النفوذ'}، أود الاستفسار عن خدمات المقاولات والتشطيبات في الرياض.`
       : 'Hello Reem Al-Nufood, I would like to inquire about your services in Riyadh and Al-Kharj.'
   )}`;
 
   return (
     <div className="min-h-screen bg-[#F8F5EE] text-[#1E2229] font-sans selection:bg-[#9B7846]/20 selection:text-[#7A5B2E] relative">
-      
+
       {/* Top Bar Navigation with direct admin access */}
       <Navbar
         lang={lang}
@@ -289,25 +289,25 @@ export default function App() {
       />
 
       {/* Floating Action Strip for Mobile & Instant Access */}
-      <div className="fixed bottom-5 start-5 z-40 flex items-center gap-3">
+      <div className="fixed bottom-4 sm:bottom-6 start-4 sm:start-6 z-40 flex items-center gap-2.5 sm:gap-3">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          className="w-13 h-13 rounded-full bg-[#25D366] hover:bg-[#1faf51] text-white flex items-center justify-center shadow-xl hover:scale-105 transition-all border-2 border-white"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#1faf51] text-white flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all border-2 border-white"
           title={isAr ? 'واتساب مباشر' : 'WhatsApp'}
           aria-label="WhatsApp"
         >
-          <MessageSquare className="w-6 h-6 text-white" />
+          <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </a>
 
         <a
           href={`tel:${settings.phone_primary}`}
-          className="w-13 h-13 rounded-full bg-gradient-to-r from-[#9B7846] to-[#7A5B2E] hover:from-[#886737] hover:to-[#6A4D23] text-white flex items-center justify-center shadow-xl hover:scale-105 transition-all border-2 border-white"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-[#9B7846] to-[#7A5B2E] hover:from-[#886737] hover:to-[#6A4D23] text-white flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all border-2 border-white"
           title={isAr ? 'اتصال مباشر' : 'Phone'}
           aria-label="Direct Phone"
         >
-          <Phone className="w-5 h-5 text-white" />
+          <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </a>
       </div>
 

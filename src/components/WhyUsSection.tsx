@@ -19,28 +19,28 @@ export const WhyUsSection: React.FC<WhyUsSectionProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="why-us" className="py-24 bg-[#F5F1E8] border-t border-[#E8E2D5]">
+    <section id="why-us" className="py-14 sm:py-20 lg:py-24 bg-[#F5F1E8] border-t border-[#E8E2D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <ScrollReveal direction="up" distance={30} className="max-w-3xl mb-16">
+        <ScrollReveal direction="up" distance={30} className="max-w-3xl mb-8 sm:mb-16">
           <div className="flex items-center gap-2 text-xs font-semibold text-[#8C6B3A] tracking-wider uppercase mb-3">
             <span>{isAr ? 'معايير التميز والضمان' : 'Principles of Distinction'}</span>
             <span aria-hidden="true">·</span>
             <span>{isAr ? 'مؤسسة ريم النفوذ' : 'Reem Al-Nufood'}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight leading-tight mb-4">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight leading-tight mb-3 sm:mb-4">
             {isAr ? 'لماذا تختار مؤسسة ريم النفوذ؟' : 'Why Choose Reem Al-Nufood?'}
           </h2>
 
-          <p className="text-base text-[#5A6273] font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-[#5A6273] font-normal leading-relaxed">
             {isAr
               ? 'نبني علاقات ثقة مستدامة مع عملائنا عبر الاحترافية العالية، الشفافية التامة، والالتزام بأدق تفاصيل العقود والمواصفات.'
               : 'Forging enduring trust through exceptional engineering discipline, clear accountability, and flawless project delivery.'}
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {VALUE_PROPOSITIONS.map((prop, idx) => (
             <ScrollReveal
               key={idx}
@@ -50,7 +50,7 @@ export const WhyUsSection: React.FC<WhyUsSectionProps> = ({ lang }) => {
               className="h-full"
             >
               <div
-                className="h-full p-8 rounded-2xl bg-white border border-[#E8E2D5] hover:border-[#9B7846]/60 transition-all duration-300 hover:shadow-xl hover:shadow-[#9B7846]/10 flex flex-col justify-between shadow-xs"
+                className="h-full p-5 sm:p-8 rounded-2xl bg-white border border-[#E8E2D5] hover:border-[#9B7846]/60 transition-all duration-300 hover:shadow-xl hover:shadow-[#9B7846]/10 flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-[#F8F5EE] border border-[#DDD5C5] flex items-center justify-center mb-6">

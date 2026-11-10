@@ -44,11 +44,11 @@ export const ProjectsGallerySection: React.FC<ProjectsGallerySectionProps> = ({
   });
 
   return (
-    <section id="projects" className="py-24 bg-[#FAF7F2] border-t border-[#E8E2D5] relative">
+    <section id="projects" className="py-14 sm:py-20 lg:py-24 bg-[#FAF7F2] border-t border-[#E8E2D5] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <ScrollReveal direction="up" distance={30} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <ScrollReveal direction="up" distance={30} className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-[#8C6B3A] tracking-wider uppercase mb-3">
               <span>{isAr ? 'سجل الإنجاز والمشاريع المنفذة' : 'Portfolio of Delivered Works'}</span>
@@ -56,11 +56,11 @@ export const ProjectsGallerySection: React.FC<ProjectsGallerySectionProps> = ({
               <span>{isAr ? 'مرتبط بقاعدة البيانات' : 'Connected to Live DB'}</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight">
               {isAr ? 'نماذج من أعمالنا الميدانية' : 'Featured On-Site Projects'}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#5A6273] mt-2 max-w-xl font-normal">
+            <p className="text-xs sm:text-base text-[#5A6273] mt-2 max-w-xl font-normal">
               {isAr
                 ? 'مشاريع حقيقية تم تنفيذها بأعلى معايير الإتقان والدقة في قصور وفلل ومباني ومحلات الرياض والخرج.'
                 : 'Real executed projects across residential villas, commercial showrooms, and private estates.'}
@@ -70,26 +70,25 @@ export const ProjectsGallerySection: React.FC<ProjectsGallerySectionProps> = ({
           {/* Quick Action: Request Quote */}
           <button
             onClick={() => onRequestQuote(isAr ? 'استفسار عن المشاريع والأعمال' : 'Portfolio Inquiry')}
-            className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#9B7846] hover:bg-[#866637] rounded-xl transition-all self-start md:self-auto shadow-md shadow-[#9B7846]/20"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#9B7846] hover:bg-[#866637] rounded-xl transition-all self-stretch sm:self-auto shadow-md shadow-[#9B7846]/20"
           >
             <span>{isAr ? 'طلب تنفيذ مشروع مماثل' : 'Request Similar Project'}</span>
           </button>
         </ScrollReveal>
 
         {/* Dual Filter Bars */}
-        <ScrollReveal direction="up" delay={0.1} distance={20} className="flex flex-wrap items-center justify-between gap-4 mb-10 pb-4 border-b border-[#E8E2D5]">
-          
-          {/* Category Filter Controls */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-white rounded-xl border border-[#DDD5C5] shadow-xs">
+        <ScrollReveal direction="up" delay={0.1} distance={20} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-10 pb-4 border-b border-[#E8E2D5]">
+
+          {/* Category Filter Controls - Horizontal Swipe on Mobile */}
+          <div className="flex items-center gap-1.5 p-1 bg-white rounded-xl border border-[#DDD5C5] shadow-xs overflow-x-auto no-scrollbar w-full sm:w-auto max-w-full">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${
-                  selectedCategory === cat.id
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${selectedCategory === cat.id
                     ? 'bg-[#9B7846] text-white font-semibold shadow-xs'
                     : 'text-[#5A6273] hover:text-[#15181F] hover:bg-[#F8F5EE]'
-                }`}
+                  }`}
               >
                 {isAr ? cat.label_ar : cat.label_en}
               </button>
@@ -97,34 +96,31 @@ export const ProjectsGallerySection: React.FC<ProjectsGallerySectionProps> = ({
           </div>
 
           {/* City Segmented Control */}
-          <div className="flex items-center gap-1 p-1 bg-white rounded-xl border border-[#DDD5C5] shadow-xs">
+          <div className="flex items-center gap-1 p-1 bg-white rounded-xl border border-[#DDD5C5] shadow-xs self-start sm:self-auto shrink-0">
             <button
               onClick={() => setSelectedCity('all')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${
-                selectedCity === 'all'
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${selectedCity === 'all'
                   ? 'bg-[#9B7846] text-white font-semibold'
                   : 'text-[#5A6273] hover:text-[#15181F]'
-              }`}
+                }`}
             >
               {isAr ? 'كافة المناطق' : 'All Areas'}
             </button>
             <button
               onClick={() => setSelectedCity('الرياض')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${
-                selectedCity === 'الرياض'
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${selectedCity === 'الرياض'
                   ? 'bg-[#9B7846] text-white font-semibold'
                   : 'text-[#5A6273] hover:text-[#15181F]'
-              }`}
+                }`}
             >
               {isAr ? 'مشاريع الرياض' : 'Riyadh'}
             </button>
             <button
               onClick={() => setSelectedCity('الخرج')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${
-                selectedCity === 'الخرج'
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap shrink-0 ${selectedCity === 'الخرج'
                   ? 'bg-[#9B7846] text-white font-semibold'
                   : 'text-[#5A6273] hover:text-[#15181F]'
-              }`}
+                }`}
             >
               {isAr ? 'مشاريع الخرج' : 'Al-Kharj'}
             </button>

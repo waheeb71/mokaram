@@ -35,12 +35,12 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#FAF7F2] border border-[#E8E2D5] rounded-2xl shadow-2xl overflow-hidden my-auto">
-        
+
         {/* Modal Sticky Header Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-white/95 sticky top-0 z-20 backdrop-blur-md">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-[#E8E2D5] bg-white/95 sticky top-0 z-20 backdrop-blur-md shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span className="text-xs font-semibold text-[#8C6B3A] uppercase tracking-wider">
               {isAr ? 'صفحة النشاط والخدمة' : 'Dedicated Activity Dossier'}
             </span>
@@ -60,10 +60,10 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="overflow-y-auto flex-1 p-6 sm:p-8 space-y-8">
-          
+        <div className="overflow-y-auto flex-1 p-4 sm:p-8 space-y-6 sm:space-y-8">
+
           {/* Hero Banner with Photography */}
-          <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden bg-[#F2EDE2] border border-[#DDD5C5]">
+          <div className="relative h-48 sm:h-80 rounded-xl overflow-hidden bg-[#F2EDE2] border border-[#DDD5C5]">
             <img
               src={service.hero_image}
               alt={title}
@@ -71,7 +71,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            
+
             <div className="absolute bottom-6 start-6 end-6">
               <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-2 leading-tight">
                 {title}
@@ -84,7 +84,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
           {/* Core Highlights & Saudi Code Compliance */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+
             <div className="bg-white p-6 rounded-xl border border-[#E8E2D5] shadow-xs">
               <h3 className="text-base font-bold text-[#15181F] mb-4 flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-[#9B7846]" />
@@ -123,7 +123,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               <MapPin className="w-4 h-4 text-[#9B7846]" />
               <span>{isAr ? 'تغطية الأحياء والمناطق المباشرة لهذا النشاط' : 'Target District Coverage'}</span>
             </h3>
-            
+
             <div className="space-y-3 text-xs">
               <div>
                 <span className="font-bold text-[#8C6B3A]">{isAr ? 'أحياء الرياض المغطاة:' : 'Riyadh:'}</span>
@@ -155,7 +155,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               <h3 className="text-base font-bold text-[#15181F]">
                 {isAr ? 'الأسئلة الشائعة حول هذا النشاط' : 'Frequently Asked Questions'}
               </h3>
-              
+
               <div className="space-y-2">
                 {service.faqs.map((faq, idx) => {
                   const isOpen = openFaqIndex === idx;

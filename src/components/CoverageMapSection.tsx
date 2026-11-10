@@ -46,11 +46,11 @@ export const CoverageMapSection: React.FC<CoverageMapSectionProps> = ({ lang, se
   const googleMapsUrlKharj = 'https://www.google.com/maps/search/?api=1&query=24.1554,47.3119';
 
   return (
-    <section id="coverage" className="py-24 bg-[#FAF7F2] relative border-t border-[#E8E2D5]">
+    <section id="coverage" className="py-14 sm:py-20 lg:py-24 bg-[#FAF7F2] relative border-t border-[#E8E2D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
-        <ScrollReveal direction="up" distance={30} className="max-w-3xl mb-14">
+        <ScrollReveal direction="up" distance={30} className="max-w-3xl mb-8 sm:mb-14">
           <div className="flex items-center gap-2 text-xs font-semibold text-[#8C6B3A] tracking-wider uppercase mb-3">
             <Navigation className="w-3.5 h-3.5" />
             <span>{isAr ? 'نطاق التغطية والمواقع الميدانية' : 'Operational Geographic Hubs'}</span>
@@ -58,11 +58,11 @@ export const CoverageMapSection: React.FC<CoverageMapSectionProps> = ({ lang, se
             <span>{isAr ? 'جاهزية خرائط Google' : 'Google Maps Ready'}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight leading-tight mb-4">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight leading-tight mb-3 sm:mb-4">
             {isAr ? 'تغطية شاملة ومباشرة في الرياض والخرج' : 'Comprehensive Coverage in Riyadh & Al-Kharj'}
           </h2>
 
-          <p className="text-base text-[#5A6273] font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-[#5A6273] font-normal leading-relaxed">
             {isAr
               ? 'فرقنا الهندسية والفنية متمركزة ومجهزة بالمعدات الكاملة في قلب العاصمة الرياض ومحافظة الخرج لضمان سرعة المعاينة وبدء الأعمال في وقت قياسي.'
               : 'Strategic project teams permanently stationed in Riyadh and Al-Kharj governorates to ensure prompt on-site assessments and execution.'}
@@ -70,25 +70,24 @@ export const CoverageMapSection: React.FC<CoverageMapSectionProps> = ({ lang, se
         </ScrollReveal>
 
         {/* 2 Regional Hubs Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 mb-8 sm:mb-12">
+
           {/* Riyadh Hub Card */}
           <ScrollReveal direction="up" delay={0.1} distance={25} className="h-full">
             <div
               onClick={() => setActiveCityTab('riyadh')}
-              className={`h-full p-8 rounded-2xl border transition-all cursor-pointer ${
-                activeCityTab === 'riyadh'
+              className={`h-full p-5 sm:p-8 rounded-2xl border transition-all cursor-pointer ${activeCityTab === 'riyadh'
                   ? 'bg-white border-[#9B7846] shadow-xl shadow-[#9B7846]/10'
                   : 'bg-white/80 border-[#E8E2D5] hover:border-[#DDD5C5]'
-              }`}
+                }`}
             >
-              <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#F4EFE6] border border-[#DDD5C5] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#F4EFE6] border border-[#DDD5C5] flex items-center justify-center shrink-0">
                     <Building className="w-5 h-5 text-[#9B7846]" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-[#15181F]">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#15181F]">
                       {isAr ? 'مركز عمليات الرياض' : 'Riyadh Central Operations'}
                     </h3>
                     <span className="text-xs text-[#717786]">
@@ -101,7 +100,7 @@ export const CoverageMapSection: React.FC<CoverageMapSectionProps> = ({ lang, se
                   href={googleMapsUrlRiyadh}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#8C6B3A] hover:text-white bg-[#F4EFE6] hover:bg-[#9B7846] border border-[#DDD5C5] rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#8C6B3A] hover:text-white bg-[#F4EFE6] hover:bg-[#9B7846] border border-[#DDD5C5] rounded-lg transition-colors self-start sm:self-auto"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <span>{isAr ? 'فتح في خرائط Google' : 'Google Maps'}</span>
@@ -130,19 +129,18 @@ export const CoverageMapSection: React.FC<CoverageMapSectionProps> = ({ lang, se
           <ScrollReveal direction="up" delay={0.2} distance={25} className="h-full">
             <div
               onClick={() => setActiveCityTab('alkharj')}
-              className={`h-full p-8 rounded-2xl border transition-all cursor-pointer ${
-                activeCityTab === 'alkharj'
+              className={`h-full p-5 sm:p-8 rounded-2xl border transition-all cursor-pointer ${activeCityTab === 'alkharj'
                   ? 'bg-white border-[#9B7846] shadow-xl shadow-[#9B7846]/10'
                   : 'bg-white/80 border-[#E8E2D5] hover:border-[#DDD5C5]'
-              }`}
+                }`}
             >
-              <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#F4EFE6] border border-[#DDD5C5] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#F4EFE6] border border-[#DDD5C5] flex items-center justify-center shrink-0">
                     <Building className="w-5 h-5 text-[#9B7846]" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-[#15181F]">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#15181F]">
                       {isAr ? 'فرع محافظة الخرج' : 'Al-Kharj Governorate Division'}
                     </h3>
                     <span className="text-xs text-[#717786]">
@@ -155,7 +153,7 @@ export const CoverageMapSection: React.FC<CoverageMapSectionProps> = ({ lang, se
                   href={googleMapsUrlKharj}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#8C6B3A] hover:text-white bg-[#F4EFE6] hover:bg-[#9B7846] border border-[#DDD5C5] rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#8C6B3A] hover:text-white bg-[#F4EFE6] hover:bg-[#9B7846] border border-[#DDD5C5] rounded-lg transition-colors self-start sm:self-auto"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <span>{isAr ? 'فتح في خرائط Google' : 'Google Maps'}</span>

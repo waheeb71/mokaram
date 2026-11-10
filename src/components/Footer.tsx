@@ -22,12 +22,12 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-[#EFEAE0] text-[#555E6D] border-t border-[#DFD7C9] pt-16 pb-12">
+    <footer className="bg-[#EFEAE0] text-[#555E6D] border-t border-[#DFD7C9] pt-10 sm:pt-16 pb-8 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-[#D8CEBD]">
-          
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-8 sm:pb-12 border-b border-[#D8CEBD]">
+
           {/* Col 1: Brand & Bio */}
           <ScrollReveal direction="up" delay={0.05} distance={20} className="space-y-4">
             <div className="flex items-center gap-3">
@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <p className="text-xs text-[#555E6D] leading-relaxed">
               {isAr
-                ? settings.about_summary_ar || 'خبرة في التنفيذ، جودة في العمل، وثقة تدوم. خدمات متكاملة في المقاولات العامة والأعمال الكهربائية والزجاج والألمنيوم والحدادة والترميم بالرياض والخرج.'
+                ? settings.about_summary_ar || 'خبرة في التنفيذ، جودة في العمل، وثقة تدوم. خدمات متكاملة في المقاولات العامة والأعمال الكهربائية والزجاج والألمنيوم والحدادة والترميم بالرياض.'
                 : 'Turnkey contracting, electrical infrastructure, architectural glass, aluminum systems, blacksmithing, and luxury renovations in Riyadh and Al-Kharj.'}
             </p>
 
@@ -139,7 +139,7 @@ export const Footer: React.FC<FooterProps> = ({
             <h4 className="text-xs font-bold text-[#15181F] uppercase tracking-wider mb-4">
               {isAr ? 'الاتصال المباشر والطلب' : 'Direct Contact'}
             </h4>
-            
+
             <div className="space-y-3 text-xs mb-5">
               <a
                 href={`tel:${settings.phone_primary}`}
@@ -176,12 +176,12 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#757E8E]">
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-center sm:text-start text-[#757E8E]">
           <div>
             © {new Date().getFullYear()} {isAr ? 'مؤسسة ريم النفوذ للمقاولات العامة والخدمات المتكاملة. جميع الحقوق محفوظة.' : 'Reem Al-Nufood Contracting. All rights reserved.'}
           </div>
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center justify-center gap-4">
             <span>{isAr ? 'الرياض والخرج والمناطق التابعة' : 'Serving Riyadh & Al-Kharj'}</span>
             <span aria-hidden="true">·</span>
             <span className="text-[#8C6B3A] font-medium">{isAr ? 'سجل تجاري معتمد' : 'CR Certified'}</span>

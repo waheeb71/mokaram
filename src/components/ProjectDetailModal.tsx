@@ -46,12 +46,12 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/65 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto bg-black/65 backdrop-blur-md animate-in fade-in duration-200">
       <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#FAF7F2] border border-[#E8E2D5] rounded-2xl shadow-2xl overflow-hidden my-auto">
-        
+
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-white sticky top-0 z-20">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-[#E8E2D5] bg-white sticky top-0 z-20 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span className="text-xs font-semibold text-[#8C6B3A] uppercase tracking-wider">
               {isAr ? 'تفاصيل المشروع المنفذ' : 'Executed Project Dossier'}
             </span>
@@ -72,7 +72,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         </div>
 
         {/* Scrollable Body */}
-        <div className="overflow-y-auto flex-1 p-6 sm:p-8 space-y-6">
+        <div className="overflow-y-auto flex-1 p-4 sm:p-8 space-y-6">
           {/* Main Showcase Image */}
           <div className="relative aspect-[16/9] rounded-xl overflow-hidden bg-[#F2EDE2] border border-[#DDD5C5] shadow-xs">
             <img
@@ -147,7 +147,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               </h4>
               <p className="text-xs text-[#5A6273] mt-0.5">
                 {isAr
-                  ? 'نوفر معاينة وتصميماً وعرض سعر مفصلاً وشاملاً الضمان والمواد بالرياض والخرج.'
+                  ? 'نوفر معاينة وتصميماً وعرض سعر مفصلاً وشاملاً الضمان والمواد بالرياض.'
                   : 'We provide full turnkey execution with warranties in Riyadh and Al-Kharj.'}
               </p>
             </div>

@@ -41,22 +41,22 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   };
 
   return (
-    <section id="services" className="py-24 bg-[#FAF7F2] relative border-t border-[#E8E2D5]">
+    <section id="services" className="py-14 sm:py-20 lg:py-24 bg-[#FAF7F2] relative border-t border-[#E8E2D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <ScrollReveal direction="up" distance={30} className="max-w-3xl mb-16">
+        <ScrollReveal direction="up" distance={30} className="max-w-3xl mb-8 sm:mb-16">
           <div className="flex items-center gap-2 text-xs font-semibold text-[#8C6B3A] tracking-wider uppercase mb-3">
             <span>{isAr ? 'قطاعات الأعمال المتخصصة' : 'Core Business Divisions'}</span>
             <span aria-hidden="true">·</span>
             <span>{isAr ? 'مؤسسة ريم النفوذ' : 'Reem Al-Nufood'}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight leading-tight mb-4">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#15181F] tracking-tight leading-tight mb-3 sm:mb-4">
             {isAr ? 'خدماتنا المتكاملة في الرياض والخرج' : 'Integrated Contracting & Engineering Services'}
           </h2>
 
-          <p className="text-base sm:text-lg text-[#5A6273] font-normal leading-relaxed">
+          <p className="text-sm sm:text-lg text-[#5A6273] font-normal leading-relaxed">
             {isAr
               ? 'نضع خبرتنا الهندسية والفنية الممتدة لتنفيذ كل نشاط وفق أعلى المواصفات الفنية مع استقلالية تامة في الفرق المتخصصة وسرعة الإنجاز.'
               : 'Dedicated independent divisions engineered for superior execution quality, rigorous safety standards, and guaranteed reliability.'}
@@ -64,7 +64,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </ScrollReveal>
 
         {/* 6 Core Activity Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {activeServices.map((service, index) => (
             <ScrollReveal
               key={service.id}
@@ -99,7 +99,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 {/* Card Body */}
-                <div className="p-6 flex-1 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
                   <div>
                     {/* Clean unboxed metadata */}
                     <div className="flex items-center gap-2 text-xs text-[#717786] mb-3">
@@ -110,16 +110,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       <span className="text-[#8C6B3A] font-medium">{isAr ? 'ضمان معتمد' : 'Warranty Included'}</span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-[#15181F] group-hover:text-[#8C6B3A] transition-colors mb-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#15181F] group-hover:text-[#8C6B3A] transition-colors mb-2.5">
                       {isAr ? service.title_ar : service.title_en}
                     </h3>
 
-                    <div className="text-xs sm:text-sm text-[#4E5667] leading-relaxed mb-6">
+                    <div className="text-xs sm:text-sm text-[#4E5667] leading-relaxed mb-5">
                       <FormattedContent text={isAr ? service.short_desc_ar : service.short_desc_en} clampLines={3} />
                     </div>
 
                     {/* Highlights Bullet List Preview */}
-                    <div className="space-y-2 mb-6 pt-4 border-t border-[#F2EDE2]">
+                    <div className="space-y-2 mb-5 pt-3.5 border-t border-[#F2EDE2]">
                       {(isAr ? service.features_ar : service.features_en).slice(0, 3).map((feat, fIdx) => (
                         <div key={fIdx} className="flex items-start gap-2 text-xs text-[#525968]">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#9B7846] mt-1.5 shrink-0" />
@@ -130,18 +130,18 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   </div>
 
                   {/* Clean Action Row */}
-                  <div className="pt-4 border-t border-[#E8E2D5] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#E8E2D5] flex items-center justify-between gap-2">
                     <button
                       onClick={() => onSelectService(service)}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8C6B3A] hover:text-[#6D4F23] transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#8C6B3A] hover:text-[#6D4F23] transition-colors truncate"
                     >
-                      <span>{isAr ? 'عرض المواصفات والأسئلة' : 'View Specifications'}</span>
-                      {isAr ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                      <span>{isAr ? 'المواصفات والأسئلة' : 'Specifications'}</span>
+                      {isAr ? <ArrowLeft className="w-3.5 h-3.5 shrink-0" /> : <ArrowRight className="w-3.5 h-3.5 shrink-0" />}
                     </button>
 
                     <button
                       onClick={() => onRequestQuoteForService(isAr ? service.title_ar : service.title_en)}
-                      className="px-3.5 py-1.5 text-xs font-semibold text-[#15181F] bg-[#F4EFE6] hover:bg-[#EAE3D5] rounded-lg transition-colors border border-[#DDD5C5]"
+                      className="px-3.5 py-1.5 text-xs font-semibold text-[#15181F] bg-[#F4EFE6] hover:bg-[#EAE3D5] rounded-lg transition-colors border border-[#DDD5C5] shrink-0"
                     >
                       {isAr ? 'طلب تسعير' : 'Get Quote'}
                     </button>
